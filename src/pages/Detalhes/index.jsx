@@ -1,22 +1,29 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function Detalhes() {
-  const { id } = useParams();
-
-  const [post, setPost] = useState([]);
+  const [breeds, setBreeds] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
-      .then((res) => setPost(res.data));
+      .get("https://catfact.ninja/breeds?limit=10")
+      .then(res => setBreeds(res.data.data))
+      .catch(() => {});
   }, []);
 
   return (
-    <>
-      <h2>{post.title}</h2>
-      <p>{post.body}</p>
-    </>
+    <section className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6">
+      <h1 className="text-3xl font-bold text-center text-rose-600 mb-6">🐈 Raças de Gatos</h1>
+      <ul className="grid gap-4">
+        {breeds.map((b, i) => (
+          <li key={i} className="p-4 bg-pink-100 rounded-lg shadow text-gray-700">
+            <p><strong>Raça:</strong> {b.breed}</p>
+            <p><strong>Origem:</strong> {b.country}</p>
+            <p><strong>Corpo:</strong> {b.body_type || 'Desconhecido'}</p>
+            <p><strong>Padrão:</strong> {b.pattern || 'Desconhecido'}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }

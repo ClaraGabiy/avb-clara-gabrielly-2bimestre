@@ -7,30 +7,20 @@ export default function Home() {
   useEffect(() => {
     axios
       .get("https://catfact.ninja/facts?limit=10")
-      .then((res) => setFacts(res.data.data))
-      .catch((err) => console.error("Erro ao buscar fatos:", err));
+      .then(res => setFacts(res.data.data))
+      .catch(() => {});
   }, []);
 
   return (
-    <div
-      className="min-h-screen bg-cover bg-center bg-blend-overlay bg-pink-200 p-6 text-gray-800"
-      style={{
-        backgroundImage: `url('https://marketplace.canva.com/MADAUzWiF5E/1/thumbnail_large-1/canva-kitten-MADAUzWiF5E.jpg')`,
-      }}
-    >
-      <div className="max-w-2xl mx-auto bg-white bg-opacity-80 rounded-lg shadow-md p-8">
-        <h2 className="text-3xl font-bold mb-6 text-center">Fatos sobre Gatos</h2>
-        <ul className="space-y-4">
-          {facts.map((fact, index) => (
-            <li
-              key={index}
-              className="p-4 bg-white bg-opacity-70 rounded shadow text-base font-medium"
-            >
-              {fact.fact}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    <section className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6">
+      <h1 className="text-3xl font-bold text-center text-rose-600 mb-6">🐱 Fatos de Gatos</h1>
+      <ul className="space-y-4">
+        {facts.map((f, i) => (
+          <li key={i} className="p-4 bg-pink-100 rounded-lg shadow text-gray-700">
+            {f.fact}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
