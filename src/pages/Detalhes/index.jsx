@@ -19,7 +19,7 @@ export default function Detalhes() {
           <li key={i} className="p-4 bg-pink-100 rounded-lg shadow text-gray-700">
             <p><strong>Raça:</strong> {b.breed}</p>
             <p><strong>Origem:</strong> {b.country}</p>
-            <p><strong>Corpo:</strong> {b.body_type || 'Desconhecido'}</p>
+            <p><strong>Pelagem:</strong> {b.coat || 'Desconhecido'}</p>
             <p><strong>Padrão:</strong> {b.pattern || 'Desconhecido'}</p>
           </li>
         ))}
